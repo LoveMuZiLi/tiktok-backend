@@ -16,7 +16,13 @@ if [ ! -f /tmp/backend/bin/tiktok-api ]; then
 fi
 
 echo "==> 部署前端静态文件"
-rsync -a --delete /tmp/frontend/ /var/www/tiktok/frontend/
+mkdir -p /var/www/tiktok/frontend
+if command -v rsync >/dev/null 2>&1; then
+  rsync -a --delete /tmp/frontend/ /var/www/tiktok/frontend/
+else
+  find /var/www/tiktok/frontend -mindepth 1 -delete 2>/dev/null || rm -rf /var/www/tiktok/frontend/*
+  cp -a /tmp/frontend/. /var/www/tiktok/frontend/
+fi
 
 echo "==> 部署后端二进制"
 install -m 755 /tmp/backend/bin/tiktok-api /opt/tiktok/backend/bin/tiktok-api

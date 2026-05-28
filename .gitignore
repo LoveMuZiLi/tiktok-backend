@@ -5,3 +5,5 @@ bin/
 deploy/deploy.local.env
 deploy/tiktok-release.tar.gz
 deploy/.deploy-stage/
+tiktok-release.tar.gz
+.deploy-stage/
