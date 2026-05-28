@@ -32,9 +32,11 @@ if [ ! -d "$FRONTEND" ]; then
   exit 1
 fi
 
-echo "==> 构建前端"
+echo "==> 构建前端（生产环境走同源 /api，由 Nginx 转发到后端）"
 cd "$FRONTEND"
 npm install
+# 留空：浏览器请求 http://<host>:8088/api/... ，不写死服务器地址
+export VITE_API_BASE_URL=
 npm run build
 
 echo "==> 交叉编译后端 (linux/amd64)"

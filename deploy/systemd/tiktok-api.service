@@ -1,16 +1,17 @@
 [Unit]
-Description=TikTok Go API
-After=network.target mysqld.service
-Wants=mysqld.service
+Description=TikTok Go API (backend for frontend /api)
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 Type=simple
 User=root
 WorkingDirectory=/opt/tiktok/backend
-EnvironmentFile=/opt/tiktok/backend/.env
+EnvironmentFile=-/opt/tiktok/backend/.env
 ExecStart=/opt/tiktok/backend/bin/tiktok-api
 Restart=on-failure
 RestartSec=5
+LimitNOFILE=65535
 
 [Install]
 WantedBy=multi-user.target
