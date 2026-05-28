@@ -18,8 +18,6 @@ if [ ! -f /opt/tiktok/backend/.env ]; then
 fi
 
 install -m 644 /tmp/tiktok.conf /etc/nginx/conf.d/tiktok.conf
-sed -i 's/YOUR_DOMAIN/_/' /etc/nginx/conf.d/tiktok.conf 2>/dev/null || \
-  sed -i '' 's/YOUR_DOMAIN/_/' /etc/nginx/conf.d/tiktok.conf 2>/dev/null || true
 
 install -m 644 /tmp/tiktok-api.service /etc/systemd/system/tiktok-api.service
 systemctl daemon-reload

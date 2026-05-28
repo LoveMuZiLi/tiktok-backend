@@ -20,11 +20,7 @@ func New(cfg config.Config, db *gorm.DB) http.Handler {
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
 	r.Use(cors.Handler(cors.Options{
-		AllowedOrigins: []string{
-			"http://localhost:5173",
-			"http://127.0.0.1:5173",
-			"http://39.96.28.124",
-		},
+		AllowedOrigins:   cfg.CORSOrigins(),
 		AllowedMethods:   []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type"},
 		AllowCredentials: true,
@@ -42,6 +38,5 @@ func New(cfg config.Config, db *gorm.DB) http.Handler {
 		r.Post("/{id}/like", videoH.Like)
 	})
 
-	_ = cfg
 	return r
 }

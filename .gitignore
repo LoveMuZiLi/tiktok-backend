@@ -2,3 +2,6 @@ bin/
 *.exe
 .env
 .DS_Store
+deploy/deploy.local.env
+deploy/tiktok-release.tar.gz
+deploy/.deploy-stage/
