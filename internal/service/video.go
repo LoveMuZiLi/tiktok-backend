@@ -102,11 +102,3 @@ func (s *VideoService) Delete(id int64) error {
 	}
 	return nil
 }
-
-func (s *VideoService) Like(id int64) (entity.VideoView, error) {
-	v, err := s.repo.IncrementLikes(id)
-	if errors.Is(err, repository.ErrVideoNotFound) {
-		return entity.VideoView{}, ErrVideoNotFound
-	}
-	return entity.ToVideoView(v), err
-}

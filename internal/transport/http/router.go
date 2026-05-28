@@ -29,6 +29,7 @@ func NewRouter(cfg config.Config, db *gorm.DB) http.Handler {
 
 	users := service.NewUserService(db)
 	videos := service.NewVideoService(db)
+	interactions := service.NewInteractionService(db)
 	follows := service.NewFollowService(db)
 	inbox := service.NewInboxService(db)
 	notifications := service.NewNotificationService(db)
@@ -36,6 +37,7 @@ func NewRouter(cfg config.Config, db *gorm.DB) http.Handler {
 	health := handler.NewHealthHandler(db)
 	userH := handler.NewUserHandler(users)
 	videoH := handler.NewVideoHandler(videos)
+	interactH := handler.NewInteractionHandler(interactions)
 	followH := handler.NewFollowHandler(follows)
 	inboxH := handler.NewInboxHandler(inbox)
 	notifyH := handler.NewNotificationHandler(notifications)
@@ -57,7 +59,16 @@ func NewRouter(cfg config.Config, db *gorm.DB) http.Handler {
 		r.Get("/{id}", videoH.Get)
 		r.Put("/{id}", videoH.Update)
 		r.Delete("/{id}", videoH.Delete)
-		r.Post("/{id}/like", videoH.Like)
+		r.Get("/{id}/interactions/status", interactH.Status)
+		r.Post("/{id}/like", interactH.Like)
+		r.Delete("/{id}/like", interactH.Unlike)
+		r.Post("/{id}/favorite", interactH.Favorite)
+		r.Delete("/{id}/favorite", interactH.Unfavorite)
+		r.Post("/{id}/share", interactH.Share)
+		r.Get("/{id}/comments", interactH.ListComments)
+		r.Post("/{id}/comments", interactH.CreateComment)
+		r.Put("/{id}/comments/{commentId}", interactH.UpdateComment)
+		r.Delete("/{id}/comments/{commentId}", interactH.DeleteComment)
 	})
 
 	r.Route("/api/v1/follows", func(r chi.Router) {

@@ -110,13 +110,3 @@ func (r *VideoRepository) Delete(id int64) error {
 	return nil
 }
 
-func (r *VideoRepository) IncrementLikes(id int64) (entity.Video, error) {
-	res := r.db.Model(&entity.Video{}).Where("id = ?", id).UpdateColumn("likes", gorm.Expr("likes + ?", 1))
-	if res.Error != nil {
-		return entity.Video{}, res.Error
-	}
-	if res.RowsAffected == 0 {
-		return entity.Video{}, ErrVideoNotFound
-	}
-	return r.GetByID(id)
-}

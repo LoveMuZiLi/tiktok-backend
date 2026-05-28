@@ -120,21 +120,3 @@ func (h *VideoHandler) Delete(w http.ResponseWriter, r *http.Request) {
 	}
 	w.WriteHeader(http.StatusNoContent)
 }
-
-func (h *VideoHandler) Like(w http.ResponseWriter, r *http.Request) {
-	id, ok := parseIDParam(r, "id")
-	if !ok {
-		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "invalid id"})
-		return
-	}
-	video, err := h.videos.Like(id)
-	if err != nil {
-		if errors.Is(err, service.ErrVideoNotFound) {
-			writeJSON(w, http.StatusNotFound, map[string]string{"error": "not found"})
-			return
-		}
-		writeJSON(w, http.StatusInternalServerError, map[string]string{"error": "internal error"})
-		return
-	}
-	writeJSON(w, http.StatusOK, video)
-}
