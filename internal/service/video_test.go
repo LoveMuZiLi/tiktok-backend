@@ -3,16 +3,16 @@ package service_test
 import (
 	"testing"
 
-	"tiktok-app/backend/internal/config"
-	"tiktok-app/backend/internal/database"
-	"tiktok-app/backend/internal/service"
+	"github.com/LoveMuZiLi/tiktok-backend/internal/config"
+	"github.com/LoveMuZiLi/tiktok-backend/internal/infra/persistence"
+	"github.com/LoveMuZiLi/tiktok-backend/internal/service"
 )
 
 func TestVideoService_List(t *testing.T) {
 	t.Skip("integration test: run in CI with MySQL")
 
 	cfg := config.Load()
-	db, err := database.Connect(cfg)
+	db, err := persistence.Connect(cfg)
 	if err != nil {
 		t.Fatalf("connect: %v", err)
 	}

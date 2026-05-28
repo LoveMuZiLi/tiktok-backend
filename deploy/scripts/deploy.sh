@@ -43,7 +43,7 @@ echo "==> 交叉编译后端 (linux/amd64)"
 cd "$BACKEND"
 export GOOS=linux GOARCH=amd64 CGO_ENABLED=0
 mkdir -p "$STAGE/backend/bin"
-go build -o "$STAGE/backend/bin/tiktok-api" ./cmd/server
+go build -o "$STAGE/backend/bin/tiktok-api" ./cmd/api
 
 echo "==> 打包"
 rm -rf "$STAGE/frontend"

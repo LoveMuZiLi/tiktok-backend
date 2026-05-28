@@ -50,4 +50,4 @@ jobs:
         run: go test ./...
 
       - name: Build
-        run: go build -o bin/tiktok-api ./cmd/server
+        run: go build -o bin/tiktok-api ./cmd/api

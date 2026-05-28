@@ -1,4 +1,4 @@
-module tiktok-app/backend
+module github.com/LoveMuZiLi/tiktok-backend
 
 go 1.22
 

@@ -7,7 +7,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 
-	"tiktok-app/backend/internal/service"
+	"github.com/LoveMuZiLi/tiktok-backend/internal/service"
 )
 
 type VideoHandler struct {

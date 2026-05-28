@@ -1,4 +1,4 @@
-package database
+package persistence
 
 import (
 	"fmt"
@@ -8,8 +8,8 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 
-	"tiktok-app/backend/internal/config"
-	"tiktok-app/backend/internal/model"
+	"github.com/LoveMuZiLi/tiktok-backend/internal/config"
+	"github.com/LoveMuZiLi/tiktok-backend/internal/entity"
 )
 
 func Connect(cfg config.Config) (*gorm.DB, error) {
@@ -27,7 +27,7 @@ func Connect(cfg config.Config) (*gorm.DB, error) {
 	sqlDB.SetMaxOpenConns(25)
 	sqlDB.SetMaxIdleConns(10)
 
-	if err := db.AutoMigrate(&model.Video{}); err != nil {
+	if err := db.AutoMigrate(&entity.Video{}); err != nil {
 		return nil, fmt.Errorf("migrate: %w", err)
 	}
 

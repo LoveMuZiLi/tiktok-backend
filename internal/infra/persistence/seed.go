@@ -1,21 +1,21 @@
-package database
+package persistence
 
 import (
 	"gorm.io/gorm"
 
-	"tiktok-app/backend/internal/model"
+	"github.com/LoveMuZiLi/tiktok-backend/internal/entity"
 )
 
 func Seed(db *gorm.DB) error {
 	var count int64
-	if err := db.Model(&model.Video{}).Count(&count).Error; err != nil {
+	if err := db.Model(&entity.Video{}).Count(&count).Error; err != nil {
 		return err
 	}
 	if count > 0 {
 		return nil
 	}
 
-	rows := []model.Video{
+	rows := []entity.Video{
 		{
 			Username: "fashion_daily",
 			Avatar:   "https://images.unsplash.com/photo-1728046666898-7e42ed206c9f?w=100&h=100&fit=crop",

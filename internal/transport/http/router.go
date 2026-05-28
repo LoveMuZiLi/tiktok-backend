@@ -1,4 +1,4 @@
-package router
+package httpserver
 
 import (
 	"net/http"
@@ -8,12 +8,12 @@ import (
 	"github.com/go-chi/cors"
 	"gorm.io/gorm"
 
-	"tiktok-app/backend/internal/config"
-	"tiktok-app/backend/internal/handler"
-	"tiktok-app/backend/internal/service"
+	"github.com/LoveMuZiLi/tiktok-backend/internal/config"
+	"github.com/LoveMuZiLi/tiktok-backend/internal/service"
+	"github.com/LoveMuZiLi/tiktok-backend/internal/transport/http/handler"
 )
 
-func New(cfg config.Config, db *gorm.DB) http.Handler {
+func NewRouter(cfg config.Config, db *gorm.DB) http.Handler {
 	r := chi.NewRouter()
 	r.Use(middleware.RequestID)
 	r.Use(middleware.RealIP)
