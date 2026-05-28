@@ -2,6 +2,8 @@
 
 Go + chi + GORM + MySQL。
 
+与 `tiktok-frontend` 放在同一父目录。全栈说明见上级目录 `tiktok-README.md`。
+
 ## 工程结构
 
 见 [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md)。
